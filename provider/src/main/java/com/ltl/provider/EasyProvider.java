@@ -2,9 +2,12 @@ package com.ltl.provider;
 
 import com.ltl.provider.service.UserService;
 import com.ltl.provider.service.impl.UserServiceImpl;
+import com.ltl.rpc.RpcApplication;
+import com.ltl.rpc.config.RpcConfig;
 import com.ltl.rpc.register.LocalRegister;
 import com.ltl.rpc.server.VertxHttpServer;
 import io.vertx.core.Vertx;
+
 
 public class EasyProvider {
 
@@ -14,6 +17,6 @@ public class EasyProvider {
 
         // 启动服务
         Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new VertxHttpServer(8080));
+        vertx.deployVerticle(new VertxHttpServer(RpcApplication.getRpcConfig().getServerPort()));
     }
 }

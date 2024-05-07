@@ -46,7 +46,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
                 Class<?> implService = LocalRegister.getService(rpcRequest.getServiceName());
                 Method method = implService.getDeclaredMethod(rpcRequest.getMethodName(), rpcRequest.getParameterTypes());
                 method.setAccessible(true);
-                Object result = method.invoke(implService.newInstance(), rpcRequest.getArgs());
+                Object result = method.invoke(implService.getDeclaredConstructor().newInstance(), rpcRequest.getArgs());
 
                 rpcResponse.setData(result);
                 rpcResponse.setDataType(method.getReturnType());

@@ -1,7 +1,9 @@
 package com.ltl.rpc.serializer;
 
-public interface Serializer {
-    <T>byte[] serialize(T obj);
+import java.io.IOException;
 
-    <T> T deserialize(byte[] bytes, Class<T> clazz);
+public interface Serializer {
+    <T>byte[] serialize(T obj) throws IOException;
+
+    <T> T deserialize(byte[] bytes, Class<T> clazz) throws IOException;
 }

@@ -4,24 +4,25 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.ltl.rpc.model.RpcRequest;
 import com.ltl.rpc.model.RpcResponse;
-import com.ltl.rpc.serializer.JdkSerializer;
 import com.ltl.rpc.serializer.Serializer;
+import com.ltl.rpc.serializer.SerializerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
 /**
  * 服务代理
  * 将请求发送给对应的 服务提供者
  */
+@Slf4j
 public class ServiceProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 指定序列化器
-        Serializer serializer = new JdkSerializer();
+        Serializer serializer = SerializerFactory.getInstance();
+        log.info("ServiceProxy serializer: " + serializer.getClass().getName());
 
         // 构造请求
         RpcRequest request = RpcRequest.builder()

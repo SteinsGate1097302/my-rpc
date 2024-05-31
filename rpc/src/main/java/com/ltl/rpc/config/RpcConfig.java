@@ -1,5 +1,7 @@
 package com.ltl.rpc.config;
 
+import com.ltl.rpc.serializer.Serializer;
+import com.ltl.rpc.serializer.SerializerKeys;
 import lombok.Data;
 
 @Data
@@ -14,4 +16,6 @@ public class RpcConfig {
     private Integer serverPort = 8080;
 
     private boolean isMock = false;
+
+    private String serializer = SerializerKeys.JDK;
 }
